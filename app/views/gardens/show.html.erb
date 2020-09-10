@@ -4,3 +4,28 @@
     <a class="btn btn-primary" href="#">Apply now</a>
   </div>
 </div>
+
+<div class="container mt-3">
+
+  <!-- DISPLAY ALL PLANTS -->
+  <div class="row">
+
+    <div class="col-8 cards">
+      <% @plants.each do |plant| %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= plant.image_url %>)">
+            <%= plant.name %>
+            <%= link_to '<i class="far fa-trash-alt"></i>'.html_safe, plant_path(plant), method: :delete, class: "delete-icon-card" %>
+          </div>
+      <% end %>
+    </div>
+
+    <div class="col-4 justify-content-center">
+      <%= simple_form_for([@garden, @plant]) do |f| %>
+        <%= f.input :name %>
+        <%= f.input :image_url %>
+        <%= f.submit class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+
+  </div>
+</div>
